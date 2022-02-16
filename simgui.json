@@ -1,0 +1,41 @@
+{
+  "NTProvider": {
+    "types": {
+      "/FMSInfo": "FMSInfo",
+      "/LiveWindow/Collector": "Subsystem",
+      "/LiveWindow/NewDriverTrain": "Subsystem",
+      "/LiveWindow/Shooter": "Subsystem",
+      "/LiveWindow/Track": "Subsystem",
+      "/LiveWindow/Ungrouped/ADXRS450_Gyro[0]": "Gyro",
+      "/LiveWindow/Ungrouped/DifferentialDrive[1]": "DifferentialDrive",
+      "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
+      "/LiveWindow/Ungrouped/Talon SRX [1]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon SRX [3]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Victor SPX [0]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Victor SPX [7]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Victor SPX [9]": "Motor Controller"
+    },
+    "windows": {
+      "/FMSInfo": {
+        "window": {
+          "visible": true
+        }
+      },
+      "/LiveWindow/Collector": {
+        "window": {
+          "visible": true
+        }
+      },
+      "/LiveWindow/Ungrouped/Scheduler": {
+        "window": {
+          "visible": true
+        }
+      }
+    }
+  },
+  "NetworkTables": {
+    "FMSInfo": {
+      "open": true
+    }
+  }
+}

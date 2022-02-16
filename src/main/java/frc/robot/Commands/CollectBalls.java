@@ -4,6 +4,7 @@
 
 package frc.robot.Commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.OI;
 import frc.robot.Subsystems.Collector;
@@ -21,7 +22,8 @@ public class CollectBalls extends CommandBase {
 
   @Override
   public void execute() {
-    balls_collector.startCollect();
+    balls_collector.startCollect(SmartDashboard.getNumber("Collector Gain", 0));
+    SmartDashboard.putNumber("Collector voltage output ", balls_collector.getMotorVoltage());
   }
 
   @Override

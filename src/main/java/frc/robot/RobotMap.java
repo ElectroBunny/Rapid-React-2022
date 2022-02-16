@@ -26,7 +26,7 @@ public class RobotMap {
 	 */
 	public final static int kEncoderUnitsPerRotation = 4096;
     
-    public final static double DIAMETER_WHELL=6*0.254; //in METERS
+    public final static double DIAMETER_WHELL=6 * 0.254; //in METERS
     public final static int MAX_VOLT = 12;
 
     public static final int JOYSTICK_CONTROLLER = 0;
@@ -36,11 +36,11 @@ public class RobotMap {
 	public static final int STICK_Z = 2;
 	public static final int THOROTTLE = 3;
 
-	public static final int DRIVE_RIGHT_MASTER = 2;
+	public static final int DRIVE_RIGHT_MASTER = 4;
     public static final int DRIVE_RIGHT_FOLLOWER = 3;
 
-    public static final int DRIVE_LEFT_MASTER = 0;
-    public static final int DRIVE_LEFT_FOLLOWER = 1;
+    public static final int DRIVE_LEFT_MASTER = 1;
+    public static final int DRIVE_LEFT_FOLLOWER = 2;
     
 
     public static final int VICTOR_COLLECTOR = 9;
@@ -90,6 +90,7 @@ public class RobotMap {
     public static final int SHOOTER_PITCH_SOLENOID_DEPLOY = 0;//0
     public static final int SHOOTER_PITCH_SOLENOID_RETRACT = 1;//0
 
+    public static final double BASKET_HEIGHT = 2.64; // Meters
     
     
 }

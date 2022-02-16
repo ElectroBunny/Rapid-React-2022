@@ -23,7 +23,9 @@ public class RobotContainer {
   private final Track ballsRoller = new Track();
   private final OI m_oi;
   private final Collector ballsCollector = new Collector();
-  private final double startTime = 0;
+  public double startTime;
+  double kP = 0; 
+  double delta_time=0;
   public RobotContainer() {
     m_oi = new OI();
     configureButtonBindings();
@@ -31,14 +33,17 @@ public class RobotContainer {
    
   }
   public void onAutoInit(){
+    startTime = Timer.getFPGATimestamp();
     }
   
   public void onAutoPeriodic(){
-    double time = Timer.getFPGATimestamp();
-
-    while (time - startTime < 5){
-      driverTrain.ArcadeDrive(-0.5, 0);
+ 
+    while (delta_time < 5){
+      delta_time = Timer.getFPGATimestamp()- startTime;
+      kP = 1 - (delta_time / 5);
+      driverTrain.ArcadeDrive(-0.4 * kP, 0);
     }
+          driverTrain.ArcadeDrive(0, 0);
     //To continue - add the shoot in the autonomous
   }
   public void onTeleopInit() {

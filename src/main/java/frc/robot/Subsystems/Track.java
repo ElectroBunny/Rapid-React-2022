@@ -4,7 +4,6 @@
 
 package frc.robot.Subsystems;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -20,11 +19,9 @@ public class Track extends SubsystemBase {
   }
 
   public void StartRoll(){
-    SmartDashboard.putBoolean("Rolling work started!", !(RobotMap.ShotWorkKey));
     victor_roller.set(ControlMode.PercentOutput, 0.3); 
   }
   public void StopRoll(){
-    SmartDashboard.putBoolean("Rolling work stopped!", !(RobotMap.ShotWorkKey));
     victor_roller.set(ControlMode.PercentOutput, 0); 
   }
   @Override

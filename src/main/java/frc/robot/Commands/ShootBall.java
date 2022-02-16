@@ -4,6 +4,7 @@
 
 package frc.robot.Commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.OI;
 import frc.robot.Subsystems.Shooter;
@@ -22,7 +23,10 @@ public class ShootBall extends CommandBase {
 
   @Override
   public void execute() {
-    balls_shooter.startShoot();
+    balls_shooter.startShoot(SmartDashboard.getNumber("Shooter Gain", 0));
+    SmartDashboard.putNumber("Shooter voltage output ", balls_shooter.getMotorVoltage());
+    //    balls_shooter.startShootTime(SmartDashboard.getNumber("Shooter Gain", 0),SmartDashboard.getNumber("Performance Time", 0));
+
   }
 
   @Override
