@@ -10,11 +10,11 @@ import frc.robot.Subsystems.NewDriverTrain;
 import frc.robot.OI;
 import frc.robot.RobotMap;
 
-public class StartArcadeDrive extends CommandBase {
+public class StartCurvatureDrive extends CommandBase {
   // private NewDriverTrain driver;
   private NewDriverTrain driver;
 
-  public StartArcadeDrive(NewDriverTrain innerDriver ) {
+  public StartCurvatureDrive(NewDriverTrain innerDriver ) {
     driver = innerDriver;
     addRequirements(driver);
   }
@@ -26,12 +26,12 @@ public class StartArcadeDrive extends CommandBase {
   public void execute() {
     double xAxis = new OI().GetDriverRawAxis(RobotMap.STICK_Y);
     double yAxis = new OI().GetDriverRawAxis(RobotMap.STICK_X);
-    driver.ArcadeDrive2(-xAxis, yAxis,true);
+    driver.curvatureDrive(-xAxis, yAxis, false);
   }
 
   @Override
   public void end(boolean interrupted) {
-    driver.ArcadeDrive2(0, 0,true);
+    driver.ArcadeDrive(0, 0);
   }
 
   @Override

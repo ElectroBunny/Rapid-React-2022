@@ -6,10 +6,17 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj.SPI;
 public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
+  // Gyro gyro;
+  // Gyro gyro1;
+
+
 
   @Override
   public void robotInit() {
@@ -17,6 +24,9 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Collector Gain", 0);
     SmartDashboard.putNumber("Shooter Gain", 0);
     SmartDashboard.putNumber("Performance Time", 0);
+    // gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
+    // gyro1 = new ADXRS450_Gyro(SPI.Port.kMXP);
+
   }
 
   @Override
@@ -27,17 +37,19 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
- 
+     m_robotContainer.onAutoInit();
+
   }
 
   @Override
   public void autonomousPeriodic() {
-
+    m_robotContainer.onAutoPeriodic();
   }
 
   @Override
   public void teleopInit() {
-   m_robotContainer.onTeleopInit();
+    m_robotContainer.onTeleopInit();
+    
   }
 
   @Override

@@ -4,11 +4,13 @@
 
 package frc.robot.Subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import frc.robot.RobotMap;
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 // import edu.wpi.first.math.geometry.Pose2d;
@@ -17,7 +19,7 @@ import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -33,15 +35,20 @@ public class NewDriverTrain extends SubsystemBase {
 
   DifferentialDriveKinematics kinematics = new  DifferentialDriveKinematics(0.52);
   DifferentialDriveOdometry odometry;
+
   Pose2d m_pose; 
-  
-  Gyro gyro;
- 
+
+  SlewRateLimiter filter = new SlewRateLimiter(0.5);
+
+  ADXRS450_Gyro gyro;
+
   public NewDriverTrain() {
     // Need to check the starting point of the robot
     gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
+
     gyro.calibrate();
-    odometry = new DifferentialDriveOdometry(gyro.getRotation2d());
+
+   // odometry = new DifferentialDriveOdometry(gyro.getRotation2d());
   
     m_rightMaster.configFactoryDefault();
     m_rightFollower.configFactoryDefault();
@@ -59,54 +66,115 @@ public class NewDriverTrain extends SubsystemBase {
 
     m_rightFollower.setInverted(InvertType.FollowMaster);
     m_leftFollower.setInverted(InvertType.FollowMaster);
+
+
+
+
     
     m_leftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
     m_rightMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
-    
+
   }
+
   public void ArcadeDrive(double forward, double turn){
-    m_leftMaster.getSelectedSensorPosition();
     if (Math.abs(forward) < 0.15) { //deadBand
       forward = 0;
     }
     if (Math.abs(turn) < 0.15) {
       turn = 0;
     }
-    m_diffDrive.arcadeDrive(forward, turn);
-
+    m_diffDrive.arcadeDrive(forward,turn);
+    m_diffDrive.feed();
   }
+
+  public void ArcadeDrive2(double forward, double turn,boolean squareInputs){
+    if (Math.abs(forward) < 0.15) { //deadBand
+      forward = 0;
+    }
+    if (Math.abs(turn) < 0.15) {
+      turn = 0;
+    }
+    m_diffDrive.arcadeDrive(forward,turn,squareInputs);
+    m_diffDrive.feed();
+  }
+
+  public void TankDrive(double forward, double turn){
+    if (Math.abs(forward) < 0.15) { //deadBand
+      forward = 0;
+    }
+    if (Math.abs(turn) < 0.15) {
+      turn = 0;
+    }
+    m_diffDrive.tankDrive(forward, turn, true);
+  }
+
+   public void curvatureDrive(double forward, double turn, boolean squareInputs){
+    if (Math.abs(forward) < 0.15) { //deadBand
+      forward = 0;
+    }
+    if (Math.abs(turn) < 0.15) {
+      turn = 0;
+    }
+    m_diffDrive.curvatureDrive(forward,turn,squareInputs);
+    m_diffDrive.feed();
+  }
+  public void voltDrive(){
+    m_leftMaster.set(ControlMode.PercentOutput, 0.4);
+    m_rightMaster.set(ControlMode.PercentOutput, 0.4);
+  }
+
+
   //https://wiki.analog.com/first/adxrs450_gyro_board_frc/java
 
   public void sendData(){
-    SmartDashboard.putNumber("Angle", gyro.getAngle());
-    SmartDashboard.putNumber("Gyro port", gyro.getRate());
-    SmartDashboard.putNumber("Sensor position left", m_leftMaster.getSelectedSensorPosition());
-    SmartDashboard.putNumber("Sensor position right", m_rightMaster.getSelectedSensorPosition());
-    SmartDashboard.putNumber("Sensor velocity left", m_leftMaster.getSelectedSensorVelocity());
-    SmartDashboard.putNumber("Sensor velocity right", m_rightMaster.getSelectedSensorVelocity());
-    SmartDashboard.putNumber("getPose() X:", m_pose.getX());
-    SmartDashboard.putNumber("getPose() Y:", m_pose.getY());
-    SmartDashboard.putNumber("getPose() X with translion:", m_pose.getTranslation().getX());
-    SmartDashboard.putNumber("getPose() Y with translion:", m_pose.getTranslation().getY());
-
-
-    
-    
+   
+    // SmartDashboard.putNumber("Sensor position left", m_leftMaster.getSelectedSensorPosition());
+    // SmartDashboard.putNumber("Sensor position right", m_rightMaster.getSelectedSensorPosition());
+    // SmartDashboard.putNumber("Sensor velocity left", m_leftMaster.getSelectedSensorVelocity());
+    // SmartDashboard.putNumber("Sensor velocity right", m_rightMaster.getSelectedSensorVelocity());
+    // SmartDashboard.putNumber("getPose() X:", m_pose.getX());
+    // SmartDashboard.putNumber("getPose() Y:", m_pose.getY());
+    // SmartDashboard.putNumber("getPose() X with translation:", m_pose.getTranslation().getX());
+    // SmartDashboard.putNumber("getPose() Y with translation:", m_pose.getTranslation().getY());
   }
 
   public double Ticks2Meter(double ticks){
-    return (ticks/4096) * Math.PI * RobotMap.DIAMETER_WHELL;
+    return (ticks / 4096) * Math.PI * RobotMap.DIAMETER_WHEEL;
   }
+
+  public double getGyroAngle(){
+    return gyro.getAngle();
+
+  }
+  public double getGyroRate(){
+    return gyro.getRate();
+
+  }
+
+
+  public void GyroToWidget(){
+    Shuffleboard.getTab("Gyro WIDGET").add("Gyro",gyro);
+
+  }
+
+  // double error = 90 - gyro.getAngle();
+
+  // // Turns the robot to face the desired direction
+  // drive.tankDrive(kP * error, -kP * error);
+
 
   @Override
   public void periodic() {
+   SmartDashboard.putNumber("Angle From Robot Contianer",gyro.getRate());
 
-    Rotation2d gyroAngle = Rotation2d.fromDegrees(-gyro.getAngle()); //check
+    //Rotation2d gyroAngle = Rotation2d.fromDegrees(-gyro.getAngle()); //check
     // Update the pose
-    m_pose = odometry.update(gyroAngle, Ticks2Meter(m_leftMaster.getSelectedSensorPosition()), Ticks2Meter(m_rightMaster.getSelectedSensorPosition()));
-    sendData();
+   // m_pose = odometry.update(gyroAngle, Ticks2Meter(m_leftMaster.getSelectedSensorPosition()), Ticks2Meter(m_rightMaster.getSelectedSensorPosition()));
+    
   }
 }
+
+
 
 /*
 

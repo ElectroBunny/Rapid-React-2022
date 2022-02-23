@@ -20,8 +20,10 @@ public class OI {
     Button button5 = new JoystickButton(joystick_controller, 5);
     POVButton povbutton1= new POVButton(joystick_controller,180);
     POVButton povbutton2= new POVButton(joystick_controller,0);
+
     XboxController xbox_controller = new XboxController(RobotMap.XBOX_CONTROLLER);
     final JoystickButton l1 = new JoystickButton(xbox_controller, 11);
+
     /*
       private final XboxController m_joystick = new XboxController(0);
     final JoystickButton l2 = new JoystickButton(m_joystick, 9);

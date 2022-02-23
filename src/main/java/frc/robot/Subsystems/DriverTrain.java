@@ -64,30 +64,28 @@
 //         this.driveLeftMaster = new TalonSRX(RobotMap.DRIVE_LEFT_MASTER);
 //         this.driveLeftMaster.setNeutralMode(NeutralMode.Brake);
 //         this.driveLeftMaster.config_kP(0, talon_P, 10);
-//         this.driveLeftMaster.config_kF(0, 1 / (RobotMap.PATH_MAX_SPEED * RobotMap.COUNTS_PER_METER * 4.0 * (1.0 / 10.0)), 10);
 
         
-//         this.driveLeftFollowOne = new TalonSRX(RobotMap.DRIVE_LEFT_FOLLOW_ONE);
+//         this.driveLeftFollowOne = new TalonSRX(RobotMap.DRIVE_LEFT_MASTER);
 //         this.driveLeftFollowOne.set(ControlMode.Follower, RobotMap.DRIVE_LEFT_MASTER);
 //         this.driveLeftFollowOne.setNeutralMode(NeutralMode.Brake);
 
-//         this.driveLeftFollowTwo = new TalonSRX(RobotMap.DRIVE_LEFT_FOLLOW_TWO);
+//         this.driveLeftFollowTwo = new TalonSRX(RobotMap.DRIVE_LEFT_FOLLOWER);
 //         this.driveLeftFollowTwo.set(ControlMode.Follower, RobotMap.DRIVE_LEFT_MASTER);
 //         this.driveLeftFollowTwo.setNeutralMode(NeutralMode.Brake);
 
 //         this.driveRightMaster = new TalonSRX(RobotMap.DRIVE_RIGHT_MASTER);
 //         this.driveRightMaster.setNeutralMode(NeutralMode.Brake);
 //         this.driveRightMaster.config_kP(0, talon_P, 10);
-//         this.driveRightMaster.config_kF(0, 1 / (RobotMap.PATH_MAX_SPEED * RobotMap.COUNTS_PER_METER * 4.0 * (1.0 / 10.0)), 10);
 //         this.driveRightMaster.setInverted(true);
 //         this.driveRightMaster.setSensorPhase(true);
 
-//         this.driveRightFollowOne = new TalonSRX(RobotMap.DRIVE_RIGHT_FOLLOW_ONE);
+//         this.driveRightFollowOne = new TalonSRX(RobotMap.DRIVE_RIGHT_MASTER);
 //         this.driveRightFollowOne.set(ControlMode.Follower, RobotMap.DRIVE_RIGHT_MASTER);
 //         this.driveRightFollowOne.setNeutralMode(NeutralMode.Brake);
 //         this.driveRightFollowOne.setInverted(true);
 
-//         this.driveRightFollowTwo = new TalonSRX(RobotMap.DRIVE_RIGHT_FOLLOW_TWO);
+//         this.driveRightFollowTwo = new TalonSRX(RobotMap.DRIVE_RIGHT_FOLLOWER);
 //         this.driveRightFollowTwo.set(ControlMode.Follower, RobotMap.DRIVE_RIGHT_MASTER);
 //         this.driveRightFollowTwo.setNeutralMode(NeutralMode.Brake);
 //         this.driveRightFollowTwo.setInverted(true);    

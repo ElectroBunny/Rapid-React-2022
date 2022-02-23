@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.Timer;
 import frc.robot.RobotMap;
 public class Shooter extends SubsystemBase {
-  private WPI_VictorSPX victor_shooter = null;
+  public WPI_VictorSPX victor_shooter = null;
   double voltage_to_motor;
   public double startTime;
   double kP = 0;
@@ -43,15 +43,24 @@ public class Shooter extends SubsystemBase {
   public void stopShoot() {
     victor_shooter.set(ControlMode.PercentOutput, 0); 
   }
-  public double calculateVoltage(double DistanceFromBasket){
-    double contDistToSub=0; //update measure start distance from the basket + half of the basket
-    double d = DistanceFromBasket - contDistToSub;
-    double w = 2.72; //check what is w
-    double alpha = d + 0.5 * w;
-    double H=0.7; //HEIGHT of shooter
-    double h = RobotMap.BASKET_HEIGHT - H;
-    double v0 = Math.sqrt((-42.743 * Math.pow(alpha, 2) / (h - 2.747 * alpha)));
+  public double calculateVelocity(double H, double D, double h, double d, double alpha){
+    /*
+      parms
+      H: first high of ball (meters)
+      D: first dist of ball (meters)
+      h: high of target from the floor (meters)
+      d: dist of robot from target (meters)
+      alpha: angle of shooting (radiands)
+    */
+    double v0 = (d + D) * Math.sqrt(-5/(h - H - (d + D) * Math.tan(alpha)))/ Math.cos(alpha);
     return v0;
+    // double contDistToSub=0; //update measure start distance from the basket + half of the basket
+    // double d = DistanceFromBasket - contDistToSub;
+    // double w = 2.72; //check what is w
+    // double alpha = d + 0.5 * w;
+    // double H=0.23; //HEIGHT of shooter
+    // double h = RobotMap.BASKET_HEIGHT - H;
+    // double v0 = Math.sqrt((-42.743 * Math.pow(alpha, 2) / (h - 2.747 * alpha)));
   }
   public double getMotorVoltage(){
     return victor_shooter.getMotorOutputPercent();
@@ -59,7 +68,6 @@ public class Shooter extends SubsystemBase {
   @Override
 
   public void periodic() {
-   voltage_to_motor = SmartDashboard.getNumber("Enter the voltage to the shooter", -1);
   }
 
   public void startShootTime(double GainShooter, double Performance_time){
