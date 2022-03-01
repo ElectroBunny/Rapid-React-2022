@@ -28,24 +28,16 @@ public class OI {
       private final XboxController m_joystick = new XboxController(0);
     final JoystickButton l2 = new JoystickButton(m_joystick, 9);
     final JoystickButton r2 = new JoystickButton(m_joystick, 10);
-    
     final JoystickButton r1 = new JoystickButton(m_joystick, 12);
-    r1.whenPressed(new PrepareToPickup(m_claw, m_wrist, m_elevator));
-    r2.whenPressed(new Pickup(m_claw, m_wrist, m_elevator));
-    l1.whenPressed(new Place(m_claw, m_wrist, m_elevator));
-    l2.whenPressed(new Autonomous(m_drivetrain, m_claw, m_wrist, m_elevator));
     */
 
     public double GetDriverRawAxis(int axis) {
         return joystick_controller.getRawAxis(axis);
     }
 
-
-
     public Joystick getJoystick() {
         return joystick_controller;
     }
-
     
     public XboxController getXbox360Joystick() {
         return xbox_controller;

@@ -6,32 +6,27 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj.SPI;
 public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
-  // Gyro gyro;
-  // Gyro gyro1;
 
-
+  ADXRS450_Gyro gyro;
 
   @Override
   public void robotInit() {
+
     m_robotContainer = new RobotContainer();
     SmartDashboard.putNumber("Collector Gain", 0);
     SmartDashboard.putNumber("Shooter Gain", 0);
     SmartDashboard.putNumber("Performance Time", 0);
-    // gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
-    // gyro1 = new ADXRS450_Gyro(SPI.Port.kMXP);
-
+    SmartDashboard.putNumber("kP", 0);
   }
 
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
+
   }
 
 
@@ -44,6 +39,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     m_robotContainer.onAutoPeriodic();
+
   }
 
   @Override
@@ -54,20 +50,29 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-   m_robotContainer.onTeleopPeriodic();
+
   }
 
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+    m_robotContainer.onDisabledInit();
+
+  }
 
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+
+  }
 
   @Override
   public void testInit() {
     CommandScheduler.getInstance().cancelAll();
+    m_robotContainer.onTeleopInit();
+
   }
 
   @Override
-  public void testPeriodic() {}
+  public void testPeriodic() {
+    
+  }
 }

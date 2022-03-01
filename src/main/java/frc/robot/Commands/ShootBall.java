@@ -25,8 +25,6 @@ public class ShootBall extends CommandBase {
   public void execute() {
     balls_shooter.startShoot(SmartDashboard.getNumber("Shooter Gain", 0));
     SmartDashboard.putNumber("Shooter voltage output ", balls_shooter.getMotorVoltage());
-    //    balls_shooter.startShootTime(SmartDashboard.getNumber("Shooter Gain", 0),SmartDashboard.getNumber("Performance Time", 0));
-
   }
 
   @Override

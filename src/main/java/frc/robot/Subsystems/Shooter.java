@@ -7,9 +7,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.Timer;
 import frc.robot.RobotMap;
 public class Shooter extends SubsystemBase {
   public WPI_VictorSPX victor_shooter = null;
@@ -19,9 +17,9 @@ public class Shooter extends SubsystemBase {
   double deltaTime = 0;
   
   public Shooter() {
-    Timer time = new Timer();
     this.victor_shooter = new WPI_VictorSPX(RobotMap.VICTOR_SHOOTER);
     this.victor_shooter.setNeutralMode(NeutralMode.Brake);
+
     victor_shooter.configNominalOutputForward(0, 100); 
     victor_shooter.configNominalOutputReverse(0, 100); 
     victor_shooter.configPeakOutputForward(1, 100); 
@@ -68,17 +66,8 @@ public class Shooter extends SubsystemBase {
   @Override
 
   public void periodic() {
-  }
-
-  public void startShootTime(double GainShooter, double Performance_time){
-    startTime = Timer.getFPGATimestamp();
-    // victor_shooter.set(ControlMode.PercentOutput, -GainShooter); 
-    while (deltaTime < Performance_time){
-      deltaTime = Timer.getFPGATimestamp()- startTime;
-      kP = (deltaTime / Performance_time);
-      victor_shooter.set(ControlMode.PercentOutput, kP * GainShooter);
-    }
+    
   }
 
 
-}
+  }

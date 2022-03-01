@@ -33,7 +33,7 @@ public class RobotMap {
     public static final int JOYSTICK_CONTROLLER = 0;
     public static final int XBOX_CONTROLLER = 1;
     public static final int STICK_X = 0; //?
-	public static final int STICK_Y = 1; //?
+	public static final int STICK_Y = 1; //?d
 	public static final int STICK_Z = 2; //?
 	public static final int THOROTTLE = 3; //? 
 
