@@ -4,14 +4,12 @@
 
 package frc.robot.Subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import frc.robot.RobotMap;
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
@@ -23,6 +21,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
 public class NewDriverTrain extends SubsystemBase {
+
   private WPI_TalonSRX m_leftMaster = new WPI_TalonSRX(RobotMap.DRIVE_LEFT_MASTER);
   private WPI_TalonSRX m_leftFollower = new WPI_TalonSRX(RobotMap.DRIVE_LEFT_FOLLOWER);
   
@@ -71,6 +70,16 @@ public class NewDriverTrain extends SubsystemBase {
       turn = 0.0;
     }
     m_diffDrive.arcadeDrive(forward, turn);
+  }
+
+  public void CurvatureDrive(double forward, double turn){
+    if (Math.abs(forward) < 0.20) { //deadBand
+      forward = 0.0;
+    }
+    if (Math.abs(turn) < 0.25) {
+      turn = 0.0;
+    }
+    m_diffDrive.curvatureDrive(forward, turn,true);
   }
 
   public void changetoCoast(){

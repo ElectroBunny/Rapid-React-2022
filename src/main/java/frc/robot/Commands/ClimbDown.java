@@ -1,27 +1,36 @@
-// // Copyright (c) FIRST and other WPILib contributors.
-// // Open Source Software; you can modify and/or share it under the terms of
-// // the WPILib BSD license file in the root directory of this project.
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
 
-// package frc.robot.Commands;
-// import edu.wpi.first.wpilibj.command.InstantCommand;
-// import frc.robot.Subsystems.Climber;
+package frc.robot.Commands;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.OI;
+import frc.robot.Subsystems.Climber;
 
 
-// public class ClimbDown extends InstantCommand {
-//   /** Creates a new ClimbDown. */
-//   public ClimbDown() {
-//     // requires(Robot.m_Climber);
-//   }
+public class ClimbDown extends CommandBase {
+  private Climber climber;
 
-//   // Called when the command is initially scheduled.
-//   @Override
-//   public void initialize() {
-//     // Robot.m_Climber.pitchDown();
+  public ClimbDown(Climber innerClimber) {
+    climber = innerClimber;
+  }
 
-//   }
+  // Called when the command is initially scheduled.
+  @Override
+  public void initialize() {
+    climber.closeClimb();
+  }
 
-//   // Called every time the scheduler runs while the command is scheduled.
-//   @Override
-//   public void execute() {;}
+@Override
+public void end(boolean interrupted) {
+  climber.offClimb();
+}
 
-// }
+@Override
+public boolean isFinished() {
+     return new OI().getXbox360Joystick().getRawButtonReleased(12);
+
+}
+}
+
+

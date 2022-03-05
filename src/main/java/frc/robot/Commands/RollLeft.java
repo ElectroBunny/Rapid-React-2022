@@ -4,24 +4,26 @@
 
 package frc.robot.Commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Subsystems.Track;
 import frc.robot.OI;
 
-public class RollerWork extends CommandBase {
+public class RollLeft extends CommandBase {
   private Track m_roller;
-
-  public RollerWork(Track inner_roller) {
+  
+  public RollLeft(Track inner_roller) {
     m_roller = inner_roller;
     addRequirements(m_roller);
   }
 
   @Override
-  public void initialize() {}
+  public void initialize() {
+    m_roller.RollLeft();
+  }
 
   @Override
   public void execute() {
-    m_roller.StartRoll();
   }
 
   @Override
@@ -32,6 +34,6 @@ public class RollerWork extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (new OI().getJoystick().getRawButtonPressed(5));
+    return false;
   }
 }

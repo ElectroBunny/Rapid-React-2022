@@ -2,36 +2,43 @@
 // // Open Source Software; you can modify and/or share it under the terms of
 // // the WPILib BSD license file in the root directory of this project.
 
-// package frc.robot.Subsystems;
-// import edu.wpi.first.wpilibj.DoubleSolenoid;
-// import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-// import frc.robot.RobotMap;
+package frc.robot.Subsystems;
 
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-// import edu.wpi.first.wpilibj2.command.SubsystemBase;
+public class Climber extends SubsystemBase {
+  DoubleSolenoid DoublePCM = null;
+  public boolean isIntakeOpen = false;
+ 
+  public Climber() {
+    DoublePCM = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);
+    DoublePCM.set(Value.kOff);
+  }
 
-// public class Climber extends SubsystemBase {
-//   DoubleSolenoid pitchSolenoid = null;
-//   public Climber() {
-//     pitchSolenoid = new DoubleSolenoid(null, RobotMap.SHOOTER_PITCH_SOLENOID_DEPLOY, RobotMap.SHOOTER_PITCH_SOLENOID_RETRACT);
-//   }
-//   public void pitchUp(){
-//    pitchSolenoid.set(Value.kForward);
-//   }
+  public void offClimb() {
+    DoublePCM.set(Value.kOff);
+  }
+// Opens the intake
+  public void openClimb() {
+    DoublePCM.set(Value.kForward);
+    isIntakeOpen = true;
+  }
 
-//   public void pitchDown(){
-//     pitchSolenoid.set(Value.kReverse);
-//   }
-//   public void pitchOff(){
-//     pitchSolenoid.set(Value.kOff);
-//   }
-  
-//   @Override
-//   public void periodic() {
-//     // This method will be called once per scheduler run
-//   }
-//   public void initDefaultCommand() {
-//     // Set the default command for a subsystem here.
-//     // setDefaultCommand(new MySpecialCommand());
-//     }
-// }
+  public void closeClimb() {
+    DoublePCM.set(Value.kReverse);
+    isIntakeOpen = false;
+  }
+
+  public void toggleClimb() {
+    if (isIntakeOpen) {
+        closeClimb();
+    } else if (!isIntakeOpen) {
+        openClimb();
+    }
+
+  }
+}

@@ -18,11 +18,16 @@ public class OI {
     Button button3 = new JoystickButton(joystick_controller, 3);
     Button button4 = new JoystickButton(joystick_controller, 4);
     Button button5 = new JoystickButton(joystick_controller, 5);
+    Button button6 = new JoystickButton(joystick_controller, 6);
+    Button button7 = new JoystickButton(joystick_controller, 7);
+    Button button8 = new JoystickButton(joystick_controller, 8);
     POVButton povbutton1= new POVButton(joystick_controller,180);
     POVButton povbutton2= new POVButton(joystick_controller,0);
 
+
     XboxController xbox_controller = new XboxController(RobotMap.XBOX_CONTROLLER);
-    final JoystickButton l1 = new JoystickButton(xbox_controller, 11);
+     public Button L1 = new JoystickButton(xbox_controller, 11);
+     public Button R1 = new JoystickButton(xbox_controller, 12);
 
     /*
       private final XboxController m_joystick = new XboxController(0);
@@ -42,4 +47,17 @@ public class OI {
     public XboxController getXbox360Joystick() {
         return xbox_controller;
     }
+    
+
+    public double GetXboxLEFTYRawAxis() {
+        return xbox_controller.getLeftY();
+    }
+    public double GetXboxRIGHTXRawAxis( ) {
+        return xbox_controller.getRightX();
+    }
+
+
+
 }
+
+// xboxPad.getX(GenericHID.Hand.kLeft);

@@ -4,6 +4,7 @@
 
 package frc.robot.Commands;
 
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Subsystems.NewDriverTrain;
@@ -11,16 +12,20 @@ import frc.robot.OI;
 import frc.robot.RobotMap;
 
 public class StartArcadeDrive extends CommandBase {
+
+  private static double kp = 0;
   private NewDriverTrain driver;
-  double err = 0, kP = 0, kD = 0.02, errPast= 0;
+  double err = 0, kP = Preferences.getDouble("kPk", kp), kD = 0.02, errPast= 0;
   double turningValue = 0;
   boolean once = false;
   boolean drivewithfix = true;
   double currnetAngle = 0;
+  double kp2=0;
   
   public StartArcadeDrive(NewDriverTrain innerDriver ) {
     driver = innerDriver;
-    addRequirements(driver); 
+    addRequirements(driver);
+  
   }
 
   @Override
@@ -30,7 +35,7 @@ public class StartArcadeDrive extends CommandBase {
 
   @Override
   public void execute() {
-      
+    if(SmartDashboard.getBoolean("startDrive", false)){
     double yAxis = new OI().GetDriverRawAxis(RobotMap.STICK_Y);
     double xAxis = new OI().GetDriverRawAxis(RobotMap.STICK_X);
 
@@ -42,31 +47,37 @@ public class StartArcadeDrive extends CommandBase {
     }
 
     if (drivewithfix){
-      kP = 0.11;
-      // kP = SmartDashboard.getNumber("kP", 0);
+      kP = Preferences.getDouble("kPk", kp);
       err = currnetAngle - driver.getGyro().getAngle();
+      if(err>1.0)
+        kp2=(0.45/err + 0.6/err); //check the fix with kp2
+            
+      
       turningValue = err * kP;
       if(Math.abs(turningValue) > 0.55){
       turningValue = 0.0;}
 
-      driver.ArcadeDrive(-yAxis * 0.85, turningValue);
+      driver.CurvatureDrive(-yAxis, turningValue);
     }
 
     else {
-      driver.ArcadeDrive(-yAxis * 0.90, xAxis);
+      driver.CurvatureDrive(-yAxis * 0.90, xAxis);
       currnetAngle = driver.getGyro().getAngle();
+      driver.getGyro().reset();   
      }
 
    SmartDashboard.putNumber("err", err);
    SmartDashboard.putNumber("turningValue", turningValue);
    SmartDashboard.putNumber("xAxis", xAxis);
    SmartDashboard.putNumber("yAxis", yAxis);
+    }
+    else
+    driver.getGyro().reset();   
   }
 
   @Override
   public void end(boolean interrupted) {
     driver.ArcadeDrive(0, 0);
-    driver.changetoCoast();
 
   }
 
