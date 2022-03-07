@@ -13,9 +13,7 @@ public class Shooter extends SubsystemBase {
   public WPI_VictorSPX victor_shooter = null;
   double voltage_to_motor;
   public double startTime;
-  double kP = 0;
-  double deltaTime = 0;
-  
+
   public Shooter() {
     this.victor_shooter = new WPI_VictorSPX(RobotMap.VICTOR_SHOOTER);
     this.victor_shooter.setNeutralMode(NeutralMode.Brake);
@@ -35,10 +33,11 @@ public class Shooter extends SubsystemBase {
    victor_shooter.set(ControlMode.PercentOutput, -GainShooter); 
   }
 
-
   public void stopShoot() {
     victor_shooter.set(ControlMode.PercentOutput, 0); 
   }
+
+
   public double calculateVelocity(double H, double D, double h, double d, double alpha){
     /*
       parms
@@ -58,6 +57,7 @@ public class Shooter extends SubsystemBase {
     // double h = RobotMap.BASKET_HEIGHT - H;
     // double v0 = Math.sqrt((-42.743 * Math.pow(alpha, 2) / (h - 2.747 * alpha)));
   }
+  
   public double getMotorVoltage(){
     return victor_shooter.getMotorOutputPercent();
   }

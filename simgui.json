@@ -1,7 +1,50 @@
 {
+  "HALProvider": {
+    "Other Devices": {
+      "ADXRS450[0]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon SRX[1]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon SRX[2]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon SRX[3]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon SRX[4]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon SRX[4]/Pulse Width Input": {
+        "header": {
+          "open": true
+        }
+      }
+    },
+    "RoboRIO": {
+      "RoboRIO Input": {
+        "open": true
+      },
+      "window": {
+        "visible": true
+      }
+    }
+  },
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
+      "/LiveWindow/Climber": "Subsystem",
       "/LiveWindow/Collector": "Subsystem",
       "/LiveWindow/NewDriverTrain": "Subsystem",
       "/LiveWindow/Shooter": "Subsystem",
@@ -12,17 +55,25 @@
       "/LiveWindow/Ungrouped/Talon SRX [1]": "Motor Controller",
       "/LiveWindow/Ungrouped/Talon SRX [2]": "Motor Controller",
       "/LiveWindow/Ungrouped/Talon SRX [3]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon SRX [4]": "Motor Controller",
       "/LiveWindow/Ungrouped/Victor SPX [0]": "Motor Controller",
       "/LiveWindow/Ungrouped/Victor SPX [7]": "Motor Controller",
-      "/LiveWindow/Ungrouped/Victor SPX [9]": "Motor Controller"
+      "/LiveWindow/Ungrouped/Victor SPX [8]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Victor SPX [9]": "Motor Controller",
+      "/Shuffleboard/Gyro WIDGET/Gyro": "Gyro"
     },
     "windows": {
-      "/FMSInfo": {
+      "/LiveWindow/Collector": {
         "window": {
           "visible": true
         }
       },
-      "/LiveWindow/Collector": {
+      "/LiveWindow/NewDriverTrain": {
+        "window": {
+          "visible": true
+        }
+      },
+      "/LiveWindow/Shooter": {
         "window": {
           "visible": true
         }
@@ -37,6 +88,42 @@
   "NetworkTables": {
     "FMSInfo": {
       "open": true
+    },
+    "LiveWindow": {
+      "Track": {
+        "open": true
+      },
+      "Ungrouped": {
+        "Compressor[0]": {
+          "open": true
+        },
+        "DifferentialDrive[1]": {
+          "open": true
+        },
+        "DoubleSolenoid[0,0]": {
+          "open": true
+        },
+        "Scheduler": {
+          "open": true
+        },
+        "open": true
+      },
+      "open": true
+    },
+    "Shuffleboard": {
+      ".metadata": {
+        "open": true
+      },
+      "Gyro WIDGET": {
+        "open": true
+      },
+      "open": true
+    },
+    "SmartDashboard": {
+      "open": true
     }
+  },
+  "NetworkTables View": {
+    "visible": false
   }
 }

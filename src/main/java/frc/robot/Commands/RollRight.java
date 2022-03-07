@@ -6,7 +6,6 @@ package frc.robot.Commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Subsystems.Track;
-import frc.robot.OI;
 
 public class RollRight extends CommandBase {
   private Track m_roller;
@@ -23,7 +22,6 @@ public class RollRight extends CommandBase {
 
   @Override
   public void execute() {
-    //m_roller.RollRight();
 
   }
 
@@ -32,10 +30,8 @@ public class RollRight extends CommandBase {
     m_roller.StopRoll();
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;
-  //  return (new OI().getJoystick().getRawButtonPressed(6));
   }
 }

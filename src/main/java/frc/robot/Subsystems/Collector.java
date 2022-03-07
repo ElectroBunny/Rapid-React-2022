@@ -34,9 +34,7 @@ public class Collector extends SubsystemBase {
   public void stopRelease() {
     victor_collector.set(ControlMode.PercentOutput, 0); 
   }
-  public double getMotorVoltage(){
-    return victor_collector.getMotorOutputPercent();
-  }
+  
   @Override
   public void periodic() {
 

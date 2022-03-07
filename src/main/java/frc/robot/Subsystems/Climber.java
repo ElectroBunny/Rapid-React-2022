@@ -4,7 +4,6 @@
 
 package frc.robot.Subsystems;
 
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -25,7 +24,6 @@ public class Climber extends SubsystemBase {
 // Opens the intake
   public void openClimb() {
     DoublePCM.set(Value.kForward);
-    isIntakeOpen = true;
   }
 
   public void closeClimb() {
@@ -33,12 +31,6 @@ public class Climber extends SubsystemBase {
     isIntakeOpen = false;
   }
 
-  public void toggleClimb() {
-    if (isIntakeOpen) {
-        closeClimb();
-    } else if (!isIntakeOpen) {
-        openClimb();
-    }
+
 
   }
-}

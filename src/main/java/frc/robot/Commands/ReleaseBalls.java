@@ -3,9 +3,7 @@
 // the MIT license.
 package frc.robot.Commands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.OI;
 import frc.robot.Subsystems.Collector;
 
 public class ReleaseBalls extends CommandBase {
@@ -17,11 +15,13 @@ public class ReleaseBalls extends CommandBase {
   }
 
   @Override
-  public void initialize() {}
+  public void initialize() {
+    
+  }
 
   @Override
   public void execute() {
-    balls_collector.startRelease(SmartDashboard.getNumber("Collector Gain", 0));
+    balls_collector.startRelease(0.4);
   }
 
   @Override
@@ -31,6 +31,6 @@ public class ReleaseBalls extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return (new OI().getJoystick().getRawButtonPressed(4));
+    return false;
   }
 }

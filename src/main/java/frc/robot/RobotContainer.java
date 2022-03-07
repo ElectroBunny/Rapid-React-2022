@@ -14,8 +14,7 @@ import frc.robot.Commands.CollectBalls;
 import frc.robot.Commands.ReleaseBalls;
 import frc.robot.Commands.ShootBall;
 import frc.robot.Commands.StartArcadeDrive;
-import frc.robot.Commands.XboxDrive;
-import frc.robot.Commands.loadAndShoot;
+import frc.robot.Commands.changeToClimbDrive;
 import frc.robot.Commands.RollRight;
 import frc.robot.Commands.RollLeft;
 import frc.robot.Subsystems.NewDriverTrain;
@@ -34,73 +33,103 @@ public class RobotContainer {
   private final Collector ballsCollector = new Collector();
   private final Climber climber = new Climber();
   public double startTime;
-  double kP = 0; 
   double delta_time = 0;
   Shooter victor_shooter = new Shooter();
   double timePeriod = 2;
-  Compressor pcmCompressor;
+  private Compressor pcmCompressor;
+ 
+
+
   public RobotContainer() {
-    driverTrain.getGyro().calibrate();
+    pcmCompressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
+    pcmCompressor.disable();
     m_oi = new OI();
     configureButtonBindings();
     driverTrain.setDefaultCommand(new StartArcadeDrive(driverTrain));
-    pcmCompressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
-    pcmCompressor.enableAnalog(0, 120);
   }
-  
-
 
   public void onAutoInit(){
     startTime = Timer.getFPGATimestamp();
-    
   }
 
   public void onAutoPeriodic(){
-    while (delta_time < 5){
+    while (delta_time < 3){
       delta_time = Timer.getFPGATimestamp()- startTime;
-      driverTrain.ArcadeDrive(-0.4, 0);
+      driverTrain.ArcadeDrive(-0.42, 0);
     }
     driverTrain.ArcadeDrive(0, 0);
+    ballsShooter.startShoot(0.9);
+    new edu.wpi.first.wpilibj2.command.WaitCommand(2);
+    new RollLeft(ballsRoller);
+    new edu.wpi.first.wpilibj2.command.WaitCommand(3);
+    ballsRoller.RollRight();
+    new edu.wpi.first.wpilibj2.command.WaitCommand(3);
+    ballsRoller.StopRoll();
 
-    
+
   }
 
   public void onTeleopInit() {
-
+  //pcmCompressor.enableDigital();
     driverTrain.GyroToWidget();
-    ballsRoller.resetBlock();
-
   }
 
+  public void DataCompressor(){
+  //  boolean enabled = pcmCompressor.enabled();
+  //   boolean pressureSwitch = pcmCompressor.getPressureSwitchValue();
+  //   double current = pcmCompressor.getCurrent();
+  //   double AnalogVoltage =pcmCompressor.getAnalogVoltage();
+
+  //   SmartDashboard.putNumber("AnalogVoltage", AnalogVoltage);
+  //   SmartDashboard.putNumber("Current", current);
+  //   SmartDashboard.putNumber("Pressure", pcmCompressor.getPressure());
+  //   SmartDashboard.putBoolean("PressureSwitchValue", pressureSwitch);
+  //   SmartDashboard.putBoolean("Commpressor enabled", enabled);
+   }
     
 
   public void onTeleopPeriodic(){
-
+    m_oi.buttonsXbox();
+ 
+  // DataCompressor();
   }
 
   public void onDisabledInit(){
-    driverTrain.changetoCoast();
     
   }
   public void onDisabledPeriodic(){
-    driverTrain.changetoCoast();
-    driverTrain.getGyro().calibrate();
     
   }
 
   private void configureButtonBindings() {
-    m_oi.button1.debounce(0.1, DebounceType.kBoth);
-    m_oi.button3.debounce(0.1, DebounceType.kBoth);
-    m_oi.button4.debounce(0.1, DebounceType.kBoth);
-    // m_oi.button1.whileHeld(new ShootBall(ballsShooter));
-    m_oi.button1.whileHeld(new loadAndShoot(ballsShooter, ballsRoller)); //check
-    m_oi.button3.whileHeld(new CollectBalls(ballsCollector));
-    m_oi.button4.whileHeld(new ReleaseBalls(ballsCollector));
-    // m_oi.button5.whileHeld(new RollLeft(ballsRoller));
-    // m_oi.button6.whileHeld(new RollRight(ballsRoller));
-    ((m_oi.button7).and(m_oi.button8)).whenActive(new XboxDrive(driverTrain));
-    m_oi.L1.whileHeld(new ClimbUp(climber));
-    m_oi.R1.whileHeld(new ClimbDown(climber));
+    m_oi.button1.debounce(0.2, DebounceType.kBoth);
+    m_oi.button3.debounce(0.2, DebounceType.kBoth);
+    m_oi.button4.debounce(0.2, DebounceType.kBoth);
+    m_oi.xbox1.debounce(0.1, DebounceType.kBoth);
+    m_oi.xbox2.debounce(0.1, DebounceType.kBoth);
+    m_oi.xbox3.debounce(0.1,DebounceType.kBoth);
+
+    ((m_oi.button7).and(m_oi.button8)).toggleWhenActive(new changeToClimbDrive(driverTrain));
+    m_oi.button5.whileHeld(new ClimbUp(climber));
+    m_oi.button6.whileHeld(new ClimbDown(climber));
+    m_oi.button9.whileHeld(new RollLeft(ballsRoller));
+    m_oi.button10.whileHeld(new RollRight(ballsRoller));
+
+    m_oi.xbox1.whileHeld(new ShootBall(ballsShooter)
+    .andThen(new edu.wpi.first.wpilibj2.command.WaitCommand(2)).
+    andThen(new RollLeft(ballsRoller))).
+    whenReleased(new RollRight(ballsRoller).withTimeout(2));
+
+    m_oi.xbox2.whileHeld(new CollectBalls(ballsCollector));
+    m_oi.xbox4.whileHeld(new ReleaseBalls(ballsCollector));
+    
+
+    
   }
+
+
+
+  
 }
+
 

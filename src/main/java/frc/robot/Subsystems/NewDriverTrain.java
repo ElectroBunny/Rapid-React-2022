@@ -4,7 +4,6 @@
 
 package frc.robot.Subsystems;
 
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -13,7 +12,6 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -24,7 +22,6 @@ public class NewDriverTrain extends SubsystemBase {
 
   private WPI_TalonSRX m_leftMaster = new WPI_TalonSRX(RobotMap.DRIVE_LEFT_MASTER);
   private WPI_TalonSRX m_leftFollower = new WPI_TalonSRX(RobotMap.DRIVE_LEFT_FOLLOWER);
-  
   private WPI_TalonSRX m_rightMaster = new WPI_TalonSRX(RobotMap.DRIVE_RIGHT_MASTER);
   private WPI_TalonSRX m_rightFollower = new WPI_TalonSRX(RobotMap.DRIVE_RIGHT_FOLLOWER);
 
@@ -32,14 +29,11 @@ public class NewDriverTrain extends SubsystemBase {
 
   DifferentialDriveKinematics kinematics = new  DifferentialDriveKinematics(0.52);
   DifferentialDriveOdometry odometry;
-
   Pose2d m_pose; 
 
-  private ADXRS450_Gyro gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
+  private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 
   public NewDriverTrain() {
-    gyro.calibrate();
-
     m_rightMaster.configFactoryDefault();
     m_rightFollower.configFactoryDefault();
     m_leftMaster.configFactoryDefault();
@@ -51,36 +45,26 @@ public class NewDriverTrain extends SubsystemBase {
     m_rightMaster.setInverted(true);
     m_leftMaster.setInverted(false);
     
-    m_leftMaster.setNeutralMode(NeutralMode.Brake);
-    m_rightMaster.setNeutralMode(NeutralMode.Brake);
-
+    m_leftMaster.setNeutralMode(NeutralMode.Coast);
+    m_rightMaster.setNeutralMode(NeutralMode.Coast);
+    m_rightFollower.setNeutralMode(NeutralMode.Coast);
+    m_leftFollower.setNeutralMode(NeutralMode.Coast);
+    
     m_rightFollower.setInverted(InvertType.FollowMaster);
     m_leftFollower.setInverted(InvertType.FollowMaster);
-
-    m_leftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
-    m_rightMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
 
   }
 
   public void ArcadeDrive(double forward, double turn){
-    if (Math.abs(forward) < 0.20) { //deadBand
+    if (Math.abs(forward) < 0.2) { //deadBand
       forward = 0.0;
     }
-    if (Math.abs(turn) < 0.25) {
+    if (Math.abs(turn) < 0.2) {
       turn = 0.0;
     }
-    m_diffDrive.arcadeDrive(forward, turn);
+    m_diffDrive.arcadeDrive(forward, turn,true);
   }
 
-  public void CurvatureDrive(double forward, double turn){
-    if (Math.abs(forward) < 0.20) { //deadBand
-      forward = 0.0;
-    }
-    if (Math.abs(turn) < 0.25) {
-      turn = 0.0;
-    }
-    m_diffDrive.curvatureDrive(forward, turn,true);
-  }
 
   public void changetoCoast(){
   m_leftMaster.setNeutralMode(NeutralMode.Coast);
@@ -109,4 +93,7 @@ public class NewDriverTrain extends SubsystemBase {
     SmartDashboard.putNumber("MotorOutputVoltage LEFT", m_leftMaster.getMotorOutputVoltage());
     SmartDashboard.putNumber("MotorOutputVoltage RIGHT", m_rightMaster.getMotorOutputVoltage());
   }
+
+
 }
+

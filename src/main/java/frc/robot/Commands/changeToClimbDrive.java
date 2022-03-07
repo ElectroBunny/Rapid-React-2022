@@ -6,32 +6,39 @@ package frc.robot.Commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.OI;
-import frc.robot.Subsystems.Shooter;
+import frc.robot.RobotMap;
+import frc.robot.Subsystems.NewDriverTrain;
 
-public class ShootBall extends CommandBase {
-  private Shooter balls_shooter;
+public class changeToClimbDrive extends CommandBase {
+  private NewDriverTrain driver;
+  
+  public changeToClimbDrive(NewDriverTrain innerDriver) {
+    driver = innerDriver;
+    addRequirements(driver); 
 
-  public ShootBall(Shooter innerShooter) {
-    balls_shooter = innerShooter;
-    addRequirements(balls_shooter);
   }
 
   @Override
   public void initialize() {
+
   }
 
   @Override
   public void execute() {
-    balls_shooter.startShoot(0.9);
+    
+    double yAxis = new OI().GetDriverRawAxis(RobotMap.STICK_Y);
+    double xAxis = new OI().GetDriverRawAxis(RobotMap.STICK_X);
+    driver.ArcadeDrive(yAxis, -xAxis);
+    
   }
 
   @Override
   public void end(boolean interrupted) {
-    balls_shooter.stopShoot();
+    driver.ArcadeDrive(0, 0);
   }
 
   @Override
   public boolean isFinished() {
-    return (new OI().getJoystick().getTriggerReleased());
+    return false;
   }
 }

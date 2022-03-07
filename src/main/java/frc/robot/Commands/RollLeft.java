@@ -4,26 +4,33 @@
 
 package frc.robot.Commands;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Subsystems.Track;
-import frc.robot.OI;
 
 public class RollLeft extends CommandBase {
   private Track m_roller;
+  DigitalInput limitSwitch;
+  public double startTime, deltaTime;
   
   public RollLeft(Track inner_roller) {
     m_roller = inner_roller;
+    limitSwitch = new DigitalInput(1);
     addRequirements(m_roller);
   }
 
   @Override
   public void initialize() {
+    startTime = Timer.getFPGATimestamp();
     m_roller.RollLeft();
   }
 
   @Override
   public void execute() {
+    deltaTime = Timer.getFPGATimestamp() - startTime;
+    SmartDashboard.putNumber("Timer Roller Left Up", deltaTime);
   }
 
   @Override
@@ -31,9 +38,8 @@ public class RollLeft extends CommandBase {
     m_roller.StopRoll();
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return limitSwitch.get();
   }
 }
