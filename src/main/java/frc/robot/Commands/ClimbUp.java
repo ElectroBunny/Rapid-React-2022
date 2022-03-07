@@ -27,7 +27,7 @@ public void end(boolean interrupted) {
 
 @Override
 public boolean isFinished() {
-     return new OI().getXbox360Joystick().getRawButtonReleased(11);
+     return new OI().getXbox360Joystick().getRawButtonReleased(5);
 
 }
 }

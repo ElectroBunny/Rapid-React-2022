@@ -31,7 +31,8 @@ public class NewDriverTrain extends SubsystemBase {
   DifferentialDriveOdometry odometry;
   Pose2d m_pose; 
 
-  private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+  //private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+
 
   public NewDriverTrain() {
     m_rightMaster.configFactoryDefault();
@@ -79,14 +80,14 @@ public class NewDriverTrain extends SubsystemBase {
     return (ticks / 4096) * Math.PI * RobotMap.DIAMETER_WHEEL;
   }
 
-  public ADXRS450_Gyro getGyro(){
-    return gyro;
-  }
+  // public ADXRS450_Gyro getGyro(){
+  //   return gyro;
+  // }
 
-  public void GyroToWidget(){
-    Shuffleboard.getTab("Gyro WIDGET").add("Gyro", gyro);
+  // public void GyroToWidget(){
+  //   Shuffleboard.getTab("Gyro WIDGET").add("Gyro", gyro);
 
-  }
+  // }
 
   @Override
   public void periodic() {

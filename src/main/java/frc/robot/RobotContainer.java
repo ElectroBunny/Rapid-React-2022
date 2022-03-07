@@ -8,6 +8,8 @@ import edu.wpi.first.math.filter.Debouncer.DebounceType;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Commands.ClimbDown;
 import frc.robot.Commands.ClimbUp;
 import frc.robot.Commands.CollectBalls;
@@ -42,7 +44,6 @@ public class RobotContainer {
 
   public RobotContainer() {
     pcmCompressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
-    pcmCompressor.disable();
     m_oi = new OI();
     configureButtonBindings();
     driverTrain.setDefaultCommand(new StartArcadeDrive(driverTrain));
@@ -71,7 +72,7 @@ public class RobotContainer {
 
   public void onTeleopInit() {
   //pcmCompressor.enableDigital();
-    driverTrain.GyroToWidget();
+  //  driverTrain.GyroToWidget();
   }
 
   public void DataCompressor(){
@@ -89,7 +90,7 @@ public class RobotContainer {
     
 
   public void onTeleopPeriodic(){
-    m_oi.buttonsXbox();
+    // m_oi.buttonsXbox();
  
   // DataCompressor();
   }
@@ -105,9 +106,11 @@ public class RobotContainer {
     m_oi.button1.debounce(0.2, DebounceType.kBoth);
     m_oi.button3.debounce(0.2, DebounceType.kBoth);
     m_oi.button4.debounce(0.2, DebounceType.kBoth);
-    m_oi.xbox1.debounce(0.1, DebounceType.kBoth);
-    m_oi.xbox2.debounce(0.1, DebounceType.kBoth);
-    m_oi.xbox3.debounce(0.1,DebounceType.kBoth);
+    m_oi.A.debounce(0.2, DebounceType.kBoth);
+    m_oi.B.debounce(0.2, DebounceType.kBoth);
+    m_oi.X.debounce(0.2,DebounceType.kBoth);
+    m_oi.Y.debounce(0.2,DebounceType.kBoth);
+
 
     ((m_oi.button7).and(m_oi.button8)).toggleWhenActive(new changeToClimbDrive(driverTrain));
     m_oi.button5.whileHeld(new ClimbUp(climber));
@@ -115,20 +118,18 @@ public class RobotContainer {
     m_oi.button9.whileHeld(new RollLeft(ballsRoller));
     m_oi.button10.whileHeld(new RollRight(ballsRoller));
 
-    m_oi.xbox1.whileHeld(new ShootBall(ballsShooter)
-    .andThen(new edu.wpi.first.wpilibj2.command.WaitCommand(2)).
-    andThen(new RollLeft(ballsRoller))).
-    whenReleased(new RollRight(ballsRoller).withTimeout(2));
+    m_oi.A.whileHeld(new ShootBall(ballsShooter)
+    .alongWith(new SequentialCommandGroup(new edu.wpi.first.wpilibj2.command.WaitCommand(2),
+    new RollLeft(ballsRoller)))).whenReleased(new RollRight(ballsRoller).withTimeout(2));
+    
 
-    m_oi.xbox2.whileHeld(new CollectBalls(ballsCollector));
-    m_oi.xbox4.whileHeld(new ReleaseBalls(ballsCollector));
+
+     m_oi.B.whileHeld(new CollectBalls(ballsCollector));
+     m_oi.Y.whileHeld(new ReleaseBalls(ballsCollector));
     
 
     
   }
-
-
-
   
 }
 

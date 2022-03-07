@@ -16,12 +16,12 @@ public class ReleaseBalls extends CommandBase {
 
   @Override
   public void initialize() {
-    
+
   }
 
   @Override
   public void execute() {
-    balls_collector.startRelease(0.4);
+    balls_collector.startRelease(0.6);
   }
 
   @Override

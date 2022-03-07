@@ -25,14 +25,14 @@ public class OI {
     Button button8 = new JoystickButton(joystick_controller, 8);
     Button button9 = new JoystickButton(joystick_controller, 9);
     Button button10 = new JoystickButton(joystick_controller, 10);
-    POVButton povbutton1= new POVButton(joystick_controller,180);
-    POVButton povbutton2= new POVButton(joystick_controller,0);
+    POVButton povbutton1= new POVButton(joystick_controller,0);
+    POVButton povbutton2= new POVButton(joystick_controller,180);
 //-------------------------------------------------------------------------------//
     XboxController xbox_controller = new XboxController(RobotMap.XBOX_CONTROLLER);
-    public Button xbox1 = new JoystickButton(xbox_controller, 1); 
-    public Button xbox2 = new JoystickButton(xbox_controller, 2);
-    public Button xbox3 = new JoystickButton(xbox_controller, 3);
-    public Button xbox4 = new JoystickButton(xbox_controller, 4);
+    public Button A = new JoystickButton(xbox_controller, 1); 
+    public Button B = new JoystickButton(xbox_controller, 2);
+    public Button X = new JoystickButton(xbox_controller, 3);
+    public Button Y = new JoystickButton(xbox_controller, 4);
     public Button xbox5 = new JoystickButton(xbox_controller, 5); 
     public Button xbox6 = new JoystickButton(xbox_controller, 6);
     public Button xbox7 = new JoystickButton(xbox_controller, 7);
@@ -72,10 +72,10 @@ public class OI {
         return xbox_controller.getRightX();
     }
     public void buttonsXbox(){
-        SmartDashboard.putBoolean("xbox1",xbox1.get());
-        SmartDashboard.putBoolean("xbox2",xbox2.get());
-        SmartDashboard.putBoolean("xbox3",xbox3.get());
-        SmartDashboard.putBoolean("xbox4",xbox4.get());
+        SmartDashboard.putBoolean("A",A.get());
+        SmartDashboard.putBoolean("B",B.get());
+        SmartDashboard.putBoolean("xbox3",X.get());
+        SmartDashboard.putBoolean("xbox4",Y.get());
         SmartDashboard.putBoolean("xbox5",xbox5.get());
         SmartDashboard.putBoolean("xbox6",xbox6.get());
         SmartDashboard.putBoolean("xbox7",xbox7.get());

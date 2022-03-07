@@ -40,6 +40,7 @@ public class RollLeft extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return limitSwitch.get();
-  }
+  return limitSwitch.get();
+  
+}
 }

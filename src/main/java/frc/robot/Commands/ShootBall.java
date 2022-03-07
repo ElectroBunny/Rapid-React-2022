@@ -32,6 +32,6 @@ public class ShootBall extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return (new OI().getJoystick().getTriggerReleased());
+    return false;
   }
 }
