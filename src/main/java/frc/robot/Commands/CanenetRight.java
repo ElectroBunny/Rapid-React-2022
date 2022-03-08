@@ -5,29 +5,33 @@
 package frc.robot.Commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.OI;
-import frc.robot.Subsystems.Shooter;
+import frc.robot.Subsystems.Canenet;
 
-public class ShootBall extends CommandBase {
-  private Shooter balls_shooter;
 
-  public ShootBall(Shooter innerShooter) {
-    balls_shooter = innerShooter;
-    addRequirements(balls_shooter);
+public class CanenetRight extends CommandBase {
+
+  private Canenet canenet;
+
+  public CanenetRight(Canenet inner_canenet) {
+    canenet = inner_canenet;
+    addRequirements(canenet);
+
   }
+
 
   @Override
   public void initialize() {
+
   }
 
   @Override
   public void execute() {
-    balls_shooter.startShoot(1);
+    canenet.turnRight(1);
   }
 
   @Override
   public void end(boolean interrupted) {
-    balls_shooter.stopShoot();
+    canenet.stopTurning();
   }
 
   @Override

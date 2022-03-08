@@ -21,9 +21,12 @@ import frc.robot.Commands.RollRight;
 import frc.robot.Commands.RollLeft;
 import frc.robot.Subsystems.NewDriverTrain;
 import frc.robot.Subsystems.Shooter;
+import frc.robot.Subsystems.Canenet;
 import frc.robot.Subsystems.Climber;
 import frc.robot.Subsystems.Collector;
 import frc.robot.Subsystems.Track;
+import frc.robot.Commands.CanenetLeft;
+import frc.robot.Commands.CanenetRight;
 
 
 public class RobotContainer {
@@ -34,6 +37,7 @@ public class RobotContainer {
   private final OI m_oi;
   private final Collector ballsCollector = new Collector();
   private final Climber climber = new Climber();
+  private final Canenet m_canenet = new Canenet();
   public double startTime;
   double delta_time = 0;
   Shooter victor_shooter = new Shooter();
@@ -43,8 +47,8 @@ public class RobotContainer {
 
 
   public RobotContainer() {
-    pcmCompressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
-    m_oi = new OI();
+   pcmCompressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
+   m_oi = new OI();
     configureButtonBindings();
     driverTrain.setDefaultCommand(new StartArcadeDrive(driverTrain));
   }
@@ -71,7 +75,7 @@ public class RobotContainer {
   }
 
   public void onTeleopInit() {
-  //pcmCompressor.enableDigital();
+  pcmCompressor.enableDigital();
   //  driverTrain.GyroToWidget();
   }
 
@@ -90,7 +94,7 @@ public class RobotContainer {
     
 
   public void onTeleopPeriodic(){
-    // m_oi.buttonsXbox();
+     m_oi.buttonsXbox();
  
   // DataCompressor();
   }
@@ -118,14 +122,17 @@ public class RobotContainer {
     m_oi.button9.whileHeld(new RollLeft(ballsRoller));
     m_oi.button10.whileHeld(new RollRight(ballsRoller));
 
-    m_oi.A.whileHeld(new ShootBall(ballsShooter)
-    .alongWith(new SequentialCommandGroup(new edu.wpi.first.wpilibj2.command.WaitCommand(2),
-    new RollLeft(ballsRoller)))).whenReleased(new RollRight(ballsRoller).withTimeout(2));
+    m_oi.A.whileHeld(new ShootBall(ballsShooter));
+    // m_oi.xbox5.whileHeld(new CanenetLeft(m_canenet));
+    // m_oi.xbox6.whileHeld(new CanenetRight(m_canenet));
+
+    // .alongWith(new SequentialCommandGroup(new edu.wpi.first.wpilibj2.command.WaitCommand(2),
+    // new RollLeft(ballsRoller)))).whenReleased(new RollRight(ballsRoller).withTimeout(2));
     
-
-
      m_oi.B.whileHeld(new CollectBalls(ballsCollector));
      m_oi.Y.whileHeld(new ReleaseBalls(ballsCollector));
+     m_oi.xbox5.whileHeld(new CanenetLeft(m_canenet));
+     m_oi.xbox6.whileHeld(new CanenetRight(m_canenet));
     
 
     
