@@ -4,19 +4,12 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.schedulers.SequentialScheduler;
 
 import edu.wpi.first.math.filter.Debouncer.DebounceType;
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.command.WaitCommand;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.Commands.ClimbDown;
-import frc.robot.Commands.ClimbUp;
 import frc.robot.Commands.CollectBalls;
 import frc.robot.Commands.ReleaseBalls;
 import frc.robot.Commands.ShootBall;
@@ -30,9 +23,9 @@ import frc.robot.Subsystems.Canenet;
 import frc.robot.Subsystems.Climber;
 import frc.robot.Subsystems.Collector;
 import frc.robot.Subsystems.Track;
-import frc.robot.Commands.AutoShoot;
 import frc.robot.Commands.CanenetLeft;
 import frc.robot.Commands.CanenetRight;
+import frc.robot.Commands.ClimbComb;
 
 
 public class RobotContainer {
@@ -144,7 +137,7 @@ public class RobotContainer {
     driverTrain.ArcadeDrive(0, 0);
 
     startTime = Timer.getFPGATimestamp();
-    delta_time=0.0;
+    delta_time = 0.0;
     while (rollermove){
       delta_time = Timer.getFPGATimestamp()- startTime;
       ballsShooter.startShoot(1.0);
@@ -179,8 +172,7 @@ public class RobotContainer {
 
 
     ((m_oi.button7).and(m_oi.button8)).toggleWhenActive(new changeToClimbDrive(driverTrain));
-    m_oi.button5.whileHeld(new ClimbUp(climber));
-    m_oi.button6.whileHeld(new ClimbDown(climber));
+    m_oi.button5.toggleWhenPressed(new ClimbComb(climber));
     m_oi.povbuttonupxbox.whileHeld(new RollLeft(ballsRoller));
     m_oi.povbuttondownxbox.whileHeld(new RollRight(ballsRoller));
 

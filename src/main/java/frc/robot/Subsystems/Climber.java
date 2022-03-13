@@ -22,17 +22,17 @@ public class Climber extends SubsystemBase {
     DoublePCMLeft.set(Value.kOff);
   }
 
-  public void offClimb() {
+  public void offClimb() { //number 0
     DoublePCMRight.set(Value.kOff);
     DoublePCMLeft.set(Value.kOff);
   }
 // Opens the intake
-  public void openClimb() {
+  public void openClimb() { // number 1
     DoublePCMRight.set(Value.kForward);
     DoublePCMLeft.set(Value.kForward);
   }
 
-  public void closeClimb() {
+  public void closeClimb() { // number 2
     DoublePCMRight.set(Value.kReverse);
     DoublePCMLeft.set(Value.kReverse);
     isIntakeOpen = false;
