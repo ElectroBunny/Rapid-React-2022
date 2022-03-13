@@ -19,12 +19,12 @@ public class Track extends SubsystemBase {
     this.victor_roller.setNeutralMode(NeutralMode.Brake);
   }
 
-  public void RollLeft() {
-    victor_roller.set(ControlMode.PercentOutput, -0.25);
+  public void RollLeft(double gain) {
+    victor_roller.set(ControlMode.PercentOutput, -gain);
   }
   
-  public void RollRight() {
-    victor_roller.set(ControlMode.PercentOutput, 0.25);
+  public void RollRight(double gain) {
+    victor_roller.set(ControlMode.PercentOutput, gain);
   }
 
   public void StopRoll() {

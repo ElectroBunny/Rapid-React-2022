@@ -23,7 +23,7 @@ public class Shooter extends SubsystemBase {
     victor_shooter.configPeakOutputForward(1, 100); 
     victor_shooter.configAllowableClosedloopError(0, 0, 100);
     victor_shooter.configPeakOutputReverse(-1, 100); 
-    victor_shooter.config_kP(0, 1.5, 100); //Proporstional controller
+    victor_shooter.config_kP(0, 1.1, 100); //Proporstional controller
     victor_shooter.config_kI(0, 0.1, 100); //Integral controller
     victor_shooter.config_kD(0, 0, 100); //Differential controller
     victor_shooter.config_kF(0, 0, 100);

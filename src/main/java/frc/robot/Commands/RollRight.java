@@ -4,11 +4,15 @@
 
 package frc.robot.Commands;
 
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Subsystems.Track;
 
 public class RollRight extends CommandBase {
   private Track m_roller;
+  private  double startTime=0;
+  private double delta_time=0;
 
   public RollRight(Track inner_roller) {
     m_roller = inner_roller;
@@ -17,11 +21,15 @@ public class RollRight extends CommandBase {
 
   @Override
   public void initialize() {
-    m_roller.RollRight();
+    startTime = Timer.getFPGATimestamp();
+    m_roller.RollRight(0.25);
   }
 
   @Override
   public void execute() {
+    delta_time = Timer.getFPGATimestamp()- startTime;
+  //  SmartDashboard.putNumber("Timer Roller Left Up", deltaTime);
+
 
   }
 
@@ -32,6 +40,7 @@ public class RollRight extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return false;
+//    return   (delta_time > 0.8);
+return false;
   }
 }

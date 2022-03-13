@@ -44,10 +44,10 @@ public class NewDriverTrain extends SubsystemBase {
     m_rightMaster.setInverted(true);
     m_leftMaster.setInverted(false);
     
-    m_leftMaster.setNeutralMode(NeutralMode.Coast);
-    m_rightMaster.setNeutralMode(NeutralMode.Coast);
-    m_rightFollower.setNeutralMode(NeutralMode.Coast);
-    m_leftFollower.setNeutralMode(NeutralMode.Coast);
+    m_leftMaster.setNeutralMode(NeutralMode.Brake);
+    m_rightMaster.setNeutralMode(NeutralMode.Brake);
+    m_rightFollower.setNeutralMode(NeutralMode.Brake);
+    m_leftFollower.setNeutralMode(NeutralMode.Brake);
     
     m_rightFollower.setInverted(InvertType.FollowMaster);
     m_leftFollower.setInverted(InvertType.FollowMaster);
@@ -62,16 +62,23 @@ public class NewDriverTrain extends SubsystemBase {
       turn = 0.0;
     }
     m_diffDrive.arcadeDrive(forward, turn,true);
+    m_diffDrive.feed();
   }
 
 
   public void changetoCoast(){
-  m_leftMaster.setNeutralMode(NeutralMode.Coast);
-  m_rightMaster.setNeutralMode(NeutralMode.Coast);
+    m_leftMaster.setNeutralMode(NeutralMode.Coast);
+    m_rightMaster.setNeutralMode(NeutralMode.Coast);
+    m_rightFollower.setNeutralMode(NeutralMode.Coast);
+    m_leftFollower.setNeutralMode(NeutralMode.Coast);
+    ;
   }
   public void changetoBrake(){
     m_leftMaster.setNeutralMode(NeutralMode.Brake);
     m_rightMaster.setNeutralMode(NeutralMode.Brake);
+    m_rightFollower.setNeutralMode(NeutralMode.Brake);
+    m_leftFollower.setNeutralMode(NeutralMode.Brake);
+    
     }
 
   public double Ticks2Meter(double ticks){

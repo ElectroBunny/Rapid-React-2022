@@ -62,8 +62,14 @@ public class RobotMap {
 
     public static final int SHOOTER_PITCH_SOLENOID_DEPLOY = 0;//0
     public static final int SHOOTER_PITCH_SOLENOID_RETRACT = 1;//0
-
     public static final double BASKET_HEIGHT = 2.64; // Meters
+
+    public static final int RIGHT_SOLENOID_FW = 0;
+    public static final int RIGHT_SOLENOID_BW = 1;
+
+    public static final int LEFT_SOLENOID_FW = 2;
+    public static final int LEFT_SOLENOID_BW = 3;
+
     
     
 }

@@ -41,6 +41,9 @@ public class OI {
     public Button xbox10 = new JoystickButton(xbox_controller, 10);
     public Button xbox11 = new JoystickButton(xbox_controller, 11);
     public Button xbox12 = new JoystickButton(xbox_controller, 12);
+    POVButton povbuttonupxbox= new POVButton(xbox_controller,0);
+    POVButton povbuttondownxbox= new POVButton(xbox_controller,180);
+
 //---------------------------------------------------------------------------------//   
     PS4Controller ps4_controller = new PS4Controller(RobotMap.PS4_CONTROLLER);
     
@@ -84,7 +87,7 @@ public class OI {
         SmartDashboard.putBoolean("xbox10",xbox10.get());
         SmartDashboard.putBoolean("xbox11",xbox11.get());
         SmartDashboard.putBoolean("xbox12",xbox12.get());
-
+    
     }
 
 

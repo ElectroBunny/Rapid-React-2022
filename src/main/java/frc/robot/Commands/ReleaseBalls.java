@@ -21,12 +21,12 @@ public class ReleaseBalls extends CommandBase {
 
   @Override
   public void execute() {
-    balls_collector.startRelease(0.6);
+    balls_collector.startRelease(0.50);
   }
 
   @Override
   public void end(boolean interrupted) {
-    balls_collector.stopRelease();
+    balls_collector.stopCollect();
   }
 
   @Override

@@ -8,29 +8,33 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotMap;
 
 public class Climber extends SubsystemBase {
-  DoubleSolenoid DoublePCM = null;
+  DoubleSolenoid DoublePCMRight = null;
+  DoubleSolenoid DoublePCMLeft = null;
   public boolean isIntakeOpen = false;
  
   public Climber() {
-    DoublePCM = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);
-    DoublePCM.set(Value.kOff);
+    DoublePCMRight = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, RobotMap.RIGHT_SOLENOID_FW, RobotMap.RIGHT_SOLENOID_BW);
+    DoublePCMLeft = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, RobotMap.LEFT_SOLENOID_FW, RobotMap.LEFT_SOLENOID_BW);
+    DoublePCMRight.set(Value.kOff);
+    DoublePCMLeft.set(Value.kOff);
   }
 
   public void offClimb() {
-    DoublePCM.set(Value.kOff);
+    DoublePCMRight.set(Value.kOff);
+    DoublePCMLeft.set(Value.kOff);
   }
 // Opens the intake
   public void openClimb() {
-    DoublePCM.set(Value.kForward);
+    DoublePCMRight.set(Value.kForward);
+    DoublePCMLeft.set(Value.kForward);
   }
 
   public void closeClimb() {
-    DoublePCM.set(Value.kReverse);
+    DoublePCMRight.set(Value.kReverse);
+    DoublePCMLeft.set(Value.kReverse);
     isIntakeOpen = false;
   }
-
-
-
   }

@@ -77,13 +77,14 @@ public class StartArcadeDrive extends CommandBase {
     //  SmartDashboard.putNumber("DelaTime ", deltaTime);
 
 
-     driver.ArcadeDrive((forwardY - reverseY)*0.85, xAxis * 0.6);
+     driver.ArcadeDrive((forwardY - reverseY)*0.95, xAxis * 0.85);
 
   }
     
   @Override
   public void end(boolean interrupted) {
     driver.ArcadeDrive(0, 0);
+    driver.changetoCoast();
 
   }
 

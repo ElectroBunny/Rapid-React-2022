@@ -12,37 +12,37 @@ import frc.robot.Subsystems.Track;
 
 public class RollLeft extends CommandBase {
   private Track m_roller;
-  DigitalInput limitSwitch;
+//  DigitalInput limitSwitch;
   public double startTime, deltaTime;
   
   public RollLeft(Track inner_roller) {
     m_roller = inner_roller;
-    limitSwitch = new DigitalInput(0);
+  //  limitSwitch = new DigitalInput(0);
     addRequirements(m_roller);
   }
 
   @Override
   public void initialize() {
     startTime = Timer.getFPGATimestamp();
-    //m_roller.RollLeft();
+    m_roller.RollLeft(0.25);
   }
 
   @Override
   public void execute() {
     deltaTime = Timer.getFPGATimestamp() - startTime;
     SmartDashboard.putNumber("Timer Roller Left Up", deltaTime);
-    SmartDashboard.putBoolean("limitswitch",  limitSwitch.get());
+    // SmartDashboard.putBoolean("limitswitch",  limitSwitch.get());
    
   }
 
   @Override
   public void end(boolean interrupted) {
-//    m_roller.StopRoll();
+   m_roller.StopRoll();
   }
 
   @Override
   public boolean isFinished() {
-//  return limitSwitch.get();
+//  return !(limitSwitch.get());
   return false;
 }
 }

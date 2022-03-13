@@ -21,7 +21,7 @@ public class ShootBall extends CommandBase {
 
   @Override
   public void execute() {
-    balls_shooter.startShoot(1);
+    balls_shooter.startShoot(1.0);
   }
 
   @Override
