@@ -20,6 +20,8 @@ public class Climber extends SubsystemBase {
     DoublePCMLeft = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, RobotMap.LEFT_SOLENOID_FW, RobotMap.LEFT_SOLENOID_BW);
     DoublePCMRight.set(Value.kOff);
     DoublePCMLeft.set(Value.kOff);
+    // DoublePCMLeft.close();
+    // DoublePCMRight.close();
   }
 
   public void offClimb() { //number 0
@@ -36,5 +38,10 @@ public class Climber extends SubsystemBase {
     DoublePCMRight.set(Value.kReverse);
     DoublePCMLeft.set(Value.kReverse);
     isIntakeOpen = false;
+  }
+
+  public void toggleClimb(){
+    DoublePCMRight.toggle();
+    DoublePCMLeft.toggle();
   }
   }

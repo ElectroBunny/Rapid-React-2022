@@ -9,22 +9,24 @@ import frc.robot.Subsystems.Climber;
 
 public class ClimbComb extends CommandBase {
   private Climber climber;
-  private int subChanger = 3;
+  private int subChanger = -1;
+  
 
   public ClimbComb(Climber innerClimber) {
     climber = innerClimber;
+    // climber.closeClimb();
+    SmartDashboard.putNumber("subChanger", subChanger);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    if (subChanger % 3 == 0){
-      climber.offClimb();
-    }
-    else if(subChanger % 3 == 1){
+  public void initialize() 
+  {
+    SmartDashboard.putNumber("subChanger", subChanger);
+    if(subChanger % 2 == 0){
       climber.openClimb();
     }
-    else{ // if(subChanger % 3 == 2) - efficiency
+    else{ 
       climber.closeClimb();
     }
   }

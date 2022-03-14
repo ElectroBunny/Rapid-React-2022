@@ -6,6 +6,7 @@ package frc.robot;
 
 
 import edu.wpi.first.math.filter.Debouncer.DebounceType;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Timer;
@@ -41,6 +42,7 @@ public class RobotContainer {
   double delta_time = 0;
   Shooter victor_shooter = new Shooter();
   double timePeriod = 2;
+
   public static  Compressor pcmCompressor;
 
  
@@ -49,9 +51,9 @@ public class RobotContainer {
   
   public RobotContainer() {
   pcmCompressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
-  //pcmCompressor.enableDigital();
-  // pcmCompressor.enableAnalog(0, 120);
-  // pcmCompressor.enableHybrid(0, 120);
+  // pcmCompressor.enableDigital();
+  // pcmCompressor.enableAnalog(-120, 120);
+  // pcmCompressor.enableHybrid(-120, 120);
   m_oi = new OI();
   driverTrain.setDefaultCommand(new StartArcadeDrive(driverTrain));
     configureButtonBindings();
@@ -172,7 +174,7 @@ public class RobotContainer {
 
 
     ((m_oi.button7).and(m_oi.button8)).toggleWhenActive(new changeToClimbDrive(driverTrain));
-    m_oi.button5.toggleWhenPressed(new ClimbComb(climber));
+    m_oi.button5.whileHeld(new ClimbComb(climber));
     m_oi.povbuttonupxbox.whileHeld(new RollLeft(ballsRoller));
     m_oi.povbuttondownxbox.whileHeld(new RollRight(ballsRoller));
 
@@ -184,7 +186,6 @@ public class RobotContainer {
      m_oi.button3.whileHeld(new CanenetRight(m_canenet));
     
   }
-  
 }
 
 
