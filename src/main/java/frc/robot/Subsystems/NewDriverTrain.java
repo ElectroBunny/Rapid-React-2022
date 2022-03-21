@@ -61,7 +61,7 @@ public class NewDriverTrain extends SubsystemBase {
     if (Math.abs(turn) < 0.2) {
       turn = 0.0;
     }
-    m_diffDrive.arcadeDrive(forward, turn,true);
+    m_diffDrive.arcadeDrive(forward, turn, true);
     m_diffDrive.feed();
   }
 

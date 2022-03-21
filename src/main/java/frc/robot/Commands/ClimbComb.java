@@ -14,7 +14,6 @@ public class ClimbComb extends CommandBase {
 
   public ClimbComb(Climber innerClimber) {
     climber = innerClimber;
-    // climber.closeClimb();
     SmartDashboard.putNumber("subChanger", subChanger);
   }
 
