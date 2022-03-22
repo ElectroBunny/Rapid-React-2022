@@ -14,6 +14,7 @@ import frc.robot.Commands.CollectBalls;
 import frc.robot.Commands.DownCollector;
 import frc.robot.Commands.ReleaseBalls;
 import frc.robot.Commands.ShootBall;
+import frc.robot.Commands.ReversedShoot;
 import frc.robot.Commands.StartArcadeDrive;
 import frc.robot.Commands.UpCollector;
 import frc.robot.Commands.changeToClimbDrive;
@@ -93,7 +94,7 @@ public class RobotContainer {
 
   public void onTeleopPeriodic(){
    //  m_oi.buttonsXbox();
- 
+    SmartDashboard.putBoolean("Shooter enabled", false);
   DataCompressor();
   }
 
@@ -119,19 +120,22 @@ public class RobotContainer {
 
 
     ((m_oi.button7).and(m_oi.button8)).toggleWhenActive(new changeToClimbDrive(driverTrain));
+
     m_oi.button5.whileHeld(new ClimbComb(climber));
 
-    // m_oi.A.whileHeld(new ShootBall(ballsShooter));
-    m_oi.button1.whileHeld(new ShootBall(ballsShooter));
+    m_oi.A.whileHeld(new ShootBall(ballsShooter));
+    m_oi.X.whileHeld(new ReversedShoot(ballsShooter));
     
-    //  m_oi.B.whileHeld(new CollectBalls(ballsCollector));
-    //  m_oi.Y.whileHeld(new ReleaseBalls(ballsCollector));
+     m_oi.B.whileHeld(new CollectBalls(ballsCollector));
+     m_oi.Y.whileHeld(new ReleaseBalls(ballsCollector));
 
-    //  m_oi.button4.whileHeld(new CanenetLeft(m_canenet));
-    //  m_oi.button3.whileHeld(new CanenetRight(m_canenet));
+     m_oi.button4.whileHeld(new CanenetLeft(m_canenet));
+     m_oi.button3.whileHeld(new CanenetRight(m_canenet));
 
-     m_oi.button4.whileHeld(new UpCollector(collectorController));
-     m_oi.button3.whileHeld(new DownCollector(collectorController));
+     m_oi.povButtonDownXbox.whileHeld(new DownCollector(collectorController));
+     m_oi.povButtonUpXbox.whileHeld(new UpCollector(collectorController));
+
+
   }
 }
 

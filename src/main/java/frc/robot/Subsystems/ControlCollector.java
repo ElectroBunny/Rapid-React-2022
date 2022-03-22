@@ -19,11 +19,11 @@ public class ControlCollector extends SubsystemBase {
   }
 
   public void RiseCollector(double Gain){
-    victor_sharsheret.set(ControlMode.PercentOutput, Gain);
+    victor_sharsheret.set(ControlMode.PercentOutput, -Gain);
   }
 
   public void DownCollector(double Gain){
-    victor_sharsheret.set(ControlMode.PercentOutput, -Gain);
+    victor_sharsheret.set(ControlMode.PercentOutput, Gain);
   }
 
   public void StopControl(){

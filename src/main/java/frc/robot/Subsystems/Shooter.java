@@ -37,6 +37,10 @@ public class Shooter extends SubsystemBase {
     victor_shooter.set(ControlMode.PercentOutput, 0); 
   }
 
+  public void startReversed(double GainShooter){
+    victor_shooter.set(ControlMode.PercentOutput, GainShooter); 
+  }
+
 
   public double calculateVelocity(double H, double D, double h, double d, double alpha){
     /*

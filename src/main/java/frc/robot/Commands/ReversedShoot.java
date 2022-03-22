@@ -7,10 +7,10 @@ package frc.robot.Commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Subsystems.Shooter;
 
-public class ShootBall extends CommandBase {
+public class ReversedShoot extends CommandBase {
   private Shooter balls_shooter;
 
-  public ShootBall(Shooter innerShooter) {
+  public ReversedShoot(Shooter innerShooter) {
     balls_shooter = innerShooter;
     addRequirements(balls_shooter);
   }
@@ -21,7 +21,7 @@ public class ShootBall extends CommandBase {
 
   @Override
   public void execute() {
-    balls_shooter.startReversed(1.0);
+    balls_shooter.startShoot(1.0);
   }
 
   @Override
