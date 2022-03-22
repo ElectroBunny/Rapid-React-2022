@@ -56,7 +56,7 @@ public class RobotContainer {
     startTime = Timer.getFPGATimestamp();
     while (delta_time < 3){
       delta_time = Timer.getFPGATimestamp() - startTime;
-      ballsShooter.startShoot(0.5);
+      ballsShooter.startShoot(1.0);
     }
     ballsShooter.stopShoot();
     startTime = 0;
@@ -66,7 +66,7 @@ public class RobotContainer {
     startTime = Timer.getFPGATimestamp();
     while (delta_time < 3){
       delta_time = Timer.getFPGATimestamp() - startTime;
-      driverTrain.ArcadeDrive(0.5, 0);
+      driverTrain.ArcadeDrive(0.4, 0);
     }
     driverTrain.ArcadeDrive(0, 0);
 

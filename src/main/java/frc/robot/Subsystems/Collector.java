@@ -20,7 +20,7 @@ public class Collector extends SubsystemBase {
   }
 
   public void startCollect(double GainCollector){
-    victor_collector.set(ControlMode.PercentOutput, GainCollector); 
+    victor_collector.set(ControlMode.PercentOutput, -GainCollector); 
   }
 
   public void stopCollect() {
@@ -28,7 +28,7 @@ public class Collector extends SubsystemBase {
   }
 
   public void startRelease(double GainReleaser){
-    victor_collector.set(ControlMode.PercentOutput, -GainReleaser);
+    victor_collector.set(ControlMode.PercentOutput, GainReleaser);
   }
   
   @Override

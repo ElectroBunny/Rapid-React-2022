@@ -27,10 +27,10 @@ public class RobotMap {
     public static final int DRIVE_LEFT_FOLLOWER = 1;
     
    
-    public static final int VICTOR_CANENET = 0;
+    public static final int VICTOR_CANENET = 10;
     public static final int VICTOR_COLLECTOR = 7;
-    public static final int VICTOR_SHOOTER = 0;
-    public static final int VICTOR_SHARSHERET = 10;
+    public static final int VICTOR_SHOOTER = 8;
+    public static final int VICTOR_SHARSHERET = 9;
 
 
     public static final int JOYSTICK_LEFT = 0;
