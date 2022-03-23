@@ -21,7 +21,7 @@ public class ReversedShoot extends CommandBase {
 
   @Override
   public void execute() {
-    balls_shooter.startShoot(1.0);
+    balls_shooter.startShoot(0.9);
   }
 
   @Override

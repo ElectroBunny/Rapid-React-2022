@@ -22,7 +22,7 @@ public class CollectBalls extends CommandBase {
 
   @Override
   public void execute() {
-    balls_collector.startCollect(0.50);
+    balls_collector.startCollect(-0.50);
    
   }
 

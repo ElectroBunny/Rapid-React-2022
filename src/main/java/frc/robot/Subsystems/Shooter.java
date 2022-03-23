@@ -18,15 +18,15 @@ public class Shooter extends SubsystemBase {
     this.victor_shooter = new WPI_VictorSPX(RobotMap.VICTOR_SHOOTER);
     this.victor_shooter.setNeutralMode(NeutralMode.Brake);
 
-    victor_shooter.configNominalOutputForward(0, 100); 
-    victor_shooter.configNominalOutputReverse(0, 100); 
-    victor_shooter.configPeakOutputForward(1, 100); 
-    victor_shooter.configAllowableClosedloopError(0, 0, 100);
-    victor_shooter.configPeakOutputReverse(-1, 100); 
-    victor_shooter.config_kP(0, 1.1, 100); //Proporstional controller
-    victor_shooter.config_kI(0, 0.1, 100); //Integral controller
-    victor_shooter.config_kD(0, 0, 100); //Differential controller
-    victor_shooter.config_kF(0, 0, 100);
+    // victor_shooter.configNominalOutputForward(0, 100); 
+    // victor_shooter.configNominalOutputReverse(0, 100); 
+    // victor_shooter.configPeakOutputForward(1, 100); 
+    // victor_shooter.configAllowableClosedloopError(0, 0, 100);
+    // victor_shooter.configPeakOutputReverse(-1, 100); 
+    // victor_shooter.config_kP(0, 1.1, 100); //Proporstional controller
+    // victor_shooter.config_kI(0, 0.1, 100); //Integral controller
+    // victor_shooter.config_kD(0, 0, 100); //Differential controller
+    // victor_shooter.config_kF(0, 0, 100);
   }
  
   public void startShoot(double GainShooter){

@@ -54,7 +54,7 @@ public class RobotContainer {
   public void onAutoInit(){
     //Shoots to the lower hub in the autonomus mode
     startTime = Timer.getFPGATimestamp();
-    while (delta_time < 3){
+    while (delta_time < 4){
       delta_time = Timer.getFPGATimestamp() - startTime;
       ballsShooter.startShoot(1.0);
     }
@@ -66,7 +66,7 @@ public class RobotContainer {
     startTime = Timer.getFPGATimestamp();
     while (delta_time < 3){
       delta_time = Timer.getFPGATimestamp() - startTime;
-      driverTrain.ArcadeDrive(0.4, 0);
+      driverTrain.ArcadeDrive(0.6, 0);
     }
     driverTrain.ArcadeDrive(0, 0);
 
@@ -94,8 +94,17 @@ public class RobotContainer {
 
   public void onTeleopPeriodic(){
    //  m_oi.buttonsXbox();
-    SmartDashboard.putBoolean("Shooter enabled", false);
   DataCompressor();
+    if(SmartDashboard.getBoolean("Enable canenet right", false)){
+      m_canenet.turnRight(1.0);
+    }
+    else if(SmartDashboard.getBoolean("Enable canenet left", false)){
+      m_canenet.turnLeft(1.0);
+    }
+    else {
+      m_canenet.stopTurning();
+    }
+    
   }
 
   public void onDisabledInit(){
@@ -132,8 +141,8 @@ public class RobotContainer {
      m_oi.button4.whileHeld(new CanenetLeft(m_canenet));
      m_oi.button3.whileHeld(new CanenetRight(m_canenet));
 
-     m_oi.povButtonDownXbox.whileHeld(new DownCollector(collectorController));
-     m_oi.povButtonUpXbox.whileHeld(new UpCollector(collectorController));
+     m_oi.xbox5.whileHeld(new DownCollector(collectorController));
+     m_oi.xbox6.whileHeld(new UpCollector(collectorController));
 
 
   }

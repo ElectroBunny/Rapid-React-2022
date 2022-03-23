@@ -22,7 +22,7 @@ public class DownCollector extends CommandBase {
 
   @Override
   public void execute() {
-    collector_controller.DownCollector(0.6);
+    collector_controller.DownCollector(0.4);
 
   }
 
