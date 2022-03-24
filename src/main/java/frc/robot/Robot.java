@@ -4,27 +4,22 @@
 
 package frc.robot;
 
-
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.CvSink;
 import edu.wpi.first.cscore.CvSource;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
 
-
   @Override
   public void robotInit() {
 //✡
-CameraServer.startAutomaticCapture();
+  CameraServer.startAutomaticCapture();
   CvSink cvSink= CameraServer.getVideo();
   CvSource outputStream = CameraServer.putVideo("Blur", 640, 480);
     m_robotContainer = new RobotContainer();
-    SmartDashboard.putBoolean("Enable canenet right", false);
-    SmartDashboard.putBoolean("Enable canenet left", false);
   }
 
   @Override

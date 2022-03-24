@@ -42,15 +42,15 @@ public class NewDriverTrain extends SubsystemBase {
     m_leftFollower.follow(m_leftMaster);
 
     m_rightMaster.setInverted(true);
+    m_rightFollower.setInverted(true);
     m_leftMaster.setInverted(false);
+    m_leftFollower.setInverted(false);
     
-    m_leftMaster.setNeutralMode(NeutralMode.Brake);
-    m_rightMaster.setNeutralMode(NeutralMode.Brake);
-    m_rightFollower.setNeutralMode(NeutralMode.Brake);
-    m_leftFollower.setNeutralMode(NeutralMode.Brake);
+    m_leftMaster.setNeutralMode(NeutralMode.Coast);
+    m_rightMaster.setNeutralMode(NeutralMode.Coast);
+    m_rightFollower.setNeutralMode(NeutralMode.Coast);
+    m_leftFollower.setNeutralMode(NeutralMode.Coast);
     
-    m_rightFollower.setInverted(InvertType.FollowMaster);
-    m_leftFollower.setInverted(InvertType.FollowMaster);
 
   }
 
@@ -58,6 +58,7 @@ public class NewDriverTrain extends SubsystemBase {
     if (Math.abs(forward) < 0.2) { //deadBand
       forward = 0.0;
     }
+    
     if (Math.abs(turn) < 0.2) {
       turn = 0.0;
     }
@@ -99,7 +100,4 @@ public class NewDriverTrain extends SubsystemBase {
     SmartDashboard.putNumber("MotorOutputVoltage LEFT", m_leftMaster.getMotorOutputVoltage());
     SmartDashboard.putNumber("MotorOutputVoltage RIGHT", m_rightMaster.getMotorOutputVoltage());
   }
-
-
 }
-

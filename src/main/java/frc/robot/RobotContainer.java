@@ -54,7 +54,7 @@ public class RobotContainer {
   public void onAutoInit(){
     //Shoots to the lower hub in the autonomus mode
     startTime = Timer.getFPGATimestamp();
-    while (delta_time < 4){
+    while (delta_time < 5){
       delta_time = Timer.getFPGATimestamp() - startTime;
       ballsShooter.startShoot(1.0);
     }
@@ -64,9 +64,9 @@ public class RobotContainer {
 
     //Drives to the outside of the tarmac in the autonomus mode
     startTime = Timer.getFPGATimestamp();
-    while (delta_time < 3){
+    while (delta_time < 2){
       delta_time = Timer.getFPGATimestamp() - startTime;
-      driverTrain.ArcadeDrive(0.6, 0);
+      driverTrain.ArcadeDrive(0.7, 0);
     }
     driverTrain.ArcadeDrive(0, 0);
 
@@ -94,17 +94,7 @@ public class RobotContainer {
 
   public void onTeleopPeriodic(){
    //  m_oi.buttonsXbox();
-  DataCompressor();
-    if(SmartDashboard.getBoolean("Enable canenet right", false)){
-      m_canenet.turnRight(1.0);
-    }
-    else if(SmartDashboard.getBoolean("Enable canenet left", false)){
-      m_canenet.turnLeft(1.0);
-    }
-    else {
-      m_canenet.stopTurning();
-    }
-    
+   // DataCompressor();
   }
 
   public void onDisabledInit(){
@@ -128,23 +118,23 @@ public class RobotContainer {
     m_oi.Y.debounce(0.2,DebounceType.kBoth);
 
 
-    ((m_oi.button7).and(m_oi.button8)).toggleWhenActive(new changeToClimbDrive(driverTrain));
-
     m_oi.button5.whileHeld(new ClimbComb(climber));
 
     m_oi.A.whileHeld(new ShootBall(ballsShooter));
     m_oi.X.whileHeld(new ReversedShoot(ballsShooter));
     
-     m_oi.B.whileHeld(new CollectBalls(ballsCollector));
-     m_oi.Y.whileHeld(new ReleaseBalls(ballsCollector));
+    //  m_oi.B.whileHeld(new CollectBalls(ballsCollector));
+    //  m_oi.Y.whileHeld(new ReleaseBalls(ballsCollector));
+    m_oi.button8.whileHeld(new CollectBalls(ballsCollector));
+    m_oi.button7.whileHeld(new ReleaseBalls(ballsCollector));
 
      m_oi.button4.whileHeld(new CanenetLeft(m_canenet));
      m_oi.button3.whileHeld(new CanenetRight(m_canenet));
 
-     m_oi.xbox5.whileHeld(new DownCollector(collectorController));
-     m_oi.xbox6.whileHeld(new UpCollector(collectorController));
-
-
+    //  m_oi.xbox5.whileHeld(new DownCollector(collectorController));
+    //  m_oi.xbox6.whileHeld(new UpCollector(collectorController));
+    m_oi.button10.whileHeld(new DownCollector(collectorController));
+    m_oi.button9.whileHeld(new UpCollector(collectorController));
   }
 }
 

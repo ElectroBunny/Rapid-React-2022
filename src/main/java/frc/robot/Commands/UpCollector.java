@@ -22,7 +22,7 @@ public class UpCollector extends CommandBase {
 
   @Override
   public void execute() {
-    collector_controller.RiseCollector(0.55);
+    collector_controller.RiseCollector(0.70);
 
   }
 
