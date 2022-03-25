@@ -51,7 +51,10 @@ public class NewDriverTrain extends SubsystemBase {
     m_rightFollower.setNeutralMode(NeutralMode.Coast);
     m_leftFollower.setNeutralMode(NeutralMode.Coast);
     
-
+    m_rightMaster.configPeakCurrentLimit(40);
+    m_rightMaster.configPeakCurrentDuration(20);
+    m_leftMaster.configPeakCurrentLimit(40);
+    m_leftMaster.configPeakCurrentDuration(20);
   }
 
   public void ArcadeDrive(double forward, double turn){
